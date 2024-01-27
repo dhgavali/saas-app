@@ -1,0 +1,33 @@
+-- CreateTable
+CREATE TABLE "Leads" (
+    "id" SERIAL NOT NULL,
+    "domain" VARCHAR(255),
+    "description" TEXT,
+    "platform" VARCHAR(255),
+    "revenue" VARCHAR(255),
+    "country" VARCHAR(255),
+    "company_address" TEXT,
+    "technologies" TEXT,
+    "first_name" VARCHAR(255),
+    "last_name" VARCHAR(255),
+    "title" VARCHAR(255),
+    "email" VARCHAR(255),
+    "person_linkedin_url" VARCHAR(255),
+    "departments" VARCHAR(255),
+    "other_emails" VARCHAR(255),
+    "company_name_for_emails" VARCHAR(255),
+    "corporate_phone" VARCHAR(255),
+    "employees" INTEGER,
+    "industry" VARCHAR(255),
+    "company_linkedin_url" VARCHAR(255),
+    "facebook_url" VARCHAR(255),
+    "twitter_url" VARCHAR(255),
+    "tiktok_url" VARCHAR(255),
+    "city" VARCHAR(255),
+    "state" VARCHAR(255),
+    "total_funding" VARCHAR(255),
+    "latest_funding" VARCHAR(255),
+    "latest_funding_amount" VARCHAR(255),
+
+    CONSTRAINT "Leads_pkey" PRIMARY KEY ("id")
+);
