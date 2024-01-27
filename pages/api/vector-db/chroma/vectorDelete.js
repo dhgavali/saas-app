@@ -1,4 +1,4 @@
-import CHROMA_DB_COLLECTION_NAME from "@/config/chromaDbCollectionConfig";
+import CHROMA_DB_COLLECTION_NAME from "config/chromaDbCollectionConfig";
 import { Chroma } from "langchain/vectorstores/chroma";
 
 export default async (req, res) => {

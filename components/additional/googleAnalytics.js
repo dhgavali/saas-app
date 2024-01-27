@@ -1,5 +1,5 @@
 import Script from "next/script";
-import GOOGLE_ANALYTICS_CODE from "@/config/googleAnalytics";
+import GOOGLE_ANALYTICS_CODE from "config/googleAnalytics";
 
 export default function GoogleAnalytics() {
   return (

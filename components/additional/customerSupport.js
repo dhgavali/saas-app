@@ -1,4 +1,4 @@
-// import CRISP_WEBSITE_ID from "@/config/crispSupport";
+// import CRISP_WEBSITE_ID from "config/crispSupport";
 
 export default function CustomerSupport() {
   return (

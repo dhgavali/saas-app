@@ -5,7 +5,7 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { Chroma } from "langchain/vectorstores/chroma";
 import { Document } from "langchain/document";
 import fs from "fs";
-import CHROMA_DB_COLLECTION_NAME from "@/config/chromaDbCollectionConfig";
+import CHROMA_DB_COLLECTION_NAME from "config/chromaDbCollectionConfig";
 
 const upload = multer({ dest: "uploads/" });
 

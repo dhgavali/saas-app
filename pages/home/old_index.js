@@ -1,6 +1,6 @@
 
-import LandingLayout from "@/components/landingPage/landingLayout";
-import LandingHeader from "@/components/landingPage/landingHeader";
+import LandingLayout from "/components/landingPage/landingLayout";
+import LandingHeader from "/components/landingPage/landingHeader";
 import { useEffect } from "react";
 import TableBox from "./table";
 

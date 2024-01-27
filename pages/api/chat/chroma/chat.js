@@ -2,7 +2,7 @@ import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { Chroma } from "langchain/vectorstores/chroma";
 import { AIMessage, HumanMessage } from "langchain/schema";
 import { makeChain } from "../../../../lib/makeChain";
-import CHROMA_DB_COLLECTION_NAME from "@/config/chromaDbCollectionConfig";
+import CHROMA_DB_COLLECTION_NAME from "config/chromaDbCollectionConfig";
 
 export default async (req, res) => {
   const { question, history, appId } = req.body;

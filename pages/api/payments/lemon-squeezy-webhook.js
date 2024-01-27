@@ -1,6 +1,6 @@
 import { Buffer } from "buffer";
 import crypto from "crypto";
-import lemonSqueezy from "@/lib/lemonSqueezy";
+import lemonSqueezy from "/lib/lemonSqueezy";
 import getRawBody from "raw-body";
 
 export async function POST(request) {

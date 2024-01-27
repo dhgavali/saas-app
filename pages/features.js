@@ -1,11 +1,11 @@
-import LandingLayout from "@/components/landingPage/landingLayout";
-import LandingHeader from "@/components/landingPage/landingHeader";
-import LandingFeature from "@/components/landingPage/landingFeature";
-import LandingHero from "@/components/landingPage/landingHero";
-import LandingFooter from "@/components/landingPage/landingFooter";
-import LandingCta from "@/components/landingPage/landingCta";
+import LandingLayout from "/components/landingPage/landingLayout";
+import LandingHeader from "/components/landingPage/landingHeader";
+import LandingFeature from "/components/landingPage/landingFeature";
+import LandingHero from "/components/landingPage/landingHero";
+import LandingFooter from "/components/landingPage/landingFooter";
+import LandingCta from "/components/landingPage/landingCta";
 import { useEffect } from "react";
-import SEO from "@/components/additional/seo";
+import SEO from "/components/additional/seo";
 
 export default function Feature() {
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "./button";
-import { stripeCheckout } from "@/lib/stripe-checkout";
+import { stripeCheckout } from "/lib/stripe-checkout";
 import { useEffect } from "react";
 
 export default function PricingCard({ tier }) {

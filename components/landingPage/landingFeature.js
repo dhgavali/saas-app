@@ -1,8 +1,8 @@
 import LandingContainer from "./landingContainer";
 import Card from "../elements/card";
 import Sprikle from "../elements/sprikle";
-import features from "@/config/featureSet";
-import why from "@/config/whySet";
+import features from "config/featureSet";
+import why from "config/whySet";
 
 const LandingFeature = () => {
   return (

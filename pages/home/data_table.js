@@ -42,16 +42,20 @@ function DataTable({ columns, data }) {
     return (
       <>
       <div className="rounded-md border">
-        <Table>
-          <TableHeader>
+        <Table style={{tableLayout: 'fixed', width: '100%' }}>
+          <TableHeader >
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id}  style={{
+                      width:
+                        header.getSize(),
+                    }}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(header.column.columnDef.header, header.getContext())}
+                        
                     </TableHead>
                   );
                 })}
@@ -84,12 +88,12 @@ function DataTable({ columns, data }) {
         
       </div>
 {/* Pagination select boxes */}
-      <div className="flex items-center justify-between px-2">
+      <div className="flex items-center justify-between px-2 py-2">
       <div className="flex-1 text-sm text-muted-foreground">
         {table.getFilteredSelectedRowModel().rows.length} of{" "}
         {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
-      <div className="flex items-center space-x-6 lg:space-x-8">
+      <div className="flex items-center space-x-6 lg:space-x-8 z-50 ">
         <div className="flex items-center space-x-2">
           <p className="text-sm font-medium">Rows per page</p>
           <Select
@@ -101,7 +105,7 @@ function DataTable({ columns, data }) {
             <SelectTrigger className="h-8 w-[70px]">
               <SelectValue placeholder={table.getState().pagination.pageSize} />
             </SelectTrigger>
-            <SelectContent side="top">
+            <SelectContent side="top" className="bg-white z-40">
               {[10, 20, 30, 40, 50].map((pageSize) => (
                 <SelectItem key={pageSize} value={`${pageSize}`}>
                   {pageSize}
@@ -117,7 +121,7 @@ function DataTable({ columns, data }) {
         <div className="flex items-center space-x-2">
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 rounded-lg lg:flex"
             onClick={() => table.setPageIndex(0)}
             disabled={!table.getCanPreviousPage()}
           >
@@ -126,7 +130,7 @@ function DataTable({ columns, data }) {
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 rounded-lg"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -135,7 +139,8 @@ function DataTable({ columns, data }) {
           </Button>
           <Button
             variant="outline"
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 rounded-lg"
+            size="icon"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
@@ -144,7 +149,7 @@ function DataTable({ columns, data }) {
           </Button>
           <Button
             variant="outline"
-            className="hidden h-8 w-8 p-0 lg:flex"
+            className="hidden h-8 w-8 p-0 rounded-lg lg:flex"
             onClick={() => table.setPageIndex(table.getPageCount() - 1)}
             disabled={!table.getCanNextPage()}
           >

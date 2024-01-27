@@ -1,11 +1,11 @@
-// import LandingLayout from "@/components/landingPage/landingLayout";
-// import LandingHeader from "@/components/landingPage/landingHeader";
-// import LandingHero from "@/components/landingPage/landingHero";
-// import LandingPricing from "@/components/landingPage/landingPricing";
-// import LandingFooter from "@/components/landingPage/landingFooter";
-// import LandingCta from "@/components/landingPage/landingCta";
+import LandingLayout from "/components/landingPage/landingLayout";
+import LandingHeader from "/components/landingPage/landingHeader";
+import LandingHero from "/components/landingPage/landingHero";
+import LandingPricing from "/components/landingPage/landingPricing";
+import LandingFooter from "/components/landingPage/landingFooter";
+import LandingCta from "/components/landingPage/landingCta";
 import { useEffect } from "react";
-import SEO from "@/components/additional/seo";
+import SEO from "/components/additional/seo";
 
 export default function Pricing() {
   useEffect(() => {
@@ -17,7 +17,7 @@ export default function Pricing() {
   return (
     <>
     <h1>hi</h1>
-      {/* <LandingLayout>
+      <LandingLayout>
         <SEO />
         <LandingHeader />
         <main className="space-y-20 mb-0">
@@ -26,7 +26,7 @@ export default function Pricing() {
           <LandingCta />
         </main>
         <LandingFooter />
-      </LandingLayout> */}
+      </LandingLayout>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import LandingContainer from "./landingContainer";
 import { useSession, signIn, signOut } from "next-auth/react";
-import pricingTiers from "@/config/pricingSet";
+import pricingTiers from "config/pricingSet";
 import PricingCard from "../elements/pricingCard";
 
 const LandingPricing = () => {

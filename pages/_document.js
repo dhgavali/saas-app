@@ -1,4 +1,4 @@
-// import CustomerSupport from "@/components/additional/customerSupport";
+// import CustomerSupport from "/components/additional/customerSupport";
 import CustomerSupport from "/components/additional/customerSupport.js";
 import { Html, Head, Main, NextScript } from "next/document";
 
