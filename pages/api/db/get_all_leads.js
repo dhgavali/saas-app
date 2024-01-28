@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   try {
     const prisma = new PrismaClient()
     const data = await prisma.leads.findMany({
-      take: 100
+      
     }); // Replace with your actual model name
     // console.log("data", data);
     res.status(200).json(data);

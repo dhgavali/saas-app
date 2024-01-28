@@ -8,6 +8,7 @@ export default NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+
     }),
     EmailProvider({
       server: {
@@ -20,7 +21,9 @@ export default NextAuth({
       },
       from: process.env.EMAIL_FROM,
     }),
+    
   ],
+  secret : process.env.NEXTAUTH_SECRET,
   adapter: PrismaAdapter(prisma),
   theme: {
     colorScheme: "auto",
