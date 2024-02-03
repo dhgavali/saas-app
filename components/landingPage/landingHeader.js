@@ -36,7 +36,7 @@ export default function LandingHeader() {
                 >
                   <div aria-hidden="true" className="flex space-x-1"></div>
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                    NextJs - Boilercode
+                    Get Ecom Leads
                   </span>
                 </a>
 

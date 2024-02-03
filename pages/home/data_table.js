@@ -7,6 +7,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import XLSX from "xlsx";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -32,9 +33,12 @@ import {
 import { Button } from "/components/ui/button"
 import { Input } from "/components/ui/input"
 import { useState, useEffect } from "react";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 
 import { country_list, revenue_list, platform_list, tech_list, industry_list } from "./selects_value";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 function DataTable({ columns }) {
@@ -62,12 +66,8 @@ function DataTable({ columns }) {
       getPaginationRowModel: getPaginationRowModel(),
     });
   
-    const [row_range, setRowRange] = useState(null);
-  
-
-
-
-
+    const [startRow, setStartRow] = useState(null);
+    const [endRow, setEndRow] = useState(null);
    const [selected_country, set_country] = useState("");
    const [selected_tech, set_tech] = useState("");
    const [selected_platform, set_platform] = useState("");
@@ -91,7 +91,28 @@ function DataTable({ columns }) {
      set_industry(selectedOption);
    };
  
+   let [error_row_range, setRowRangeError] = useState("");
+
+ 
+   const handleSecondInputBlur = () => {
+    if (endRow !== '' && parseInt(endRow) <= parseInt(startRow)) {
+     setRowRangeError('End Row must be greater than start Row.');
+      // Optionally, you can reset the second input value here
+      // setSecondValue('');
+    }
+    else{
+    setRowRangeError("")
+    }
+  };
    
+
+  const exportToExcel = (jsonData, filename = "test") => {
+    const XLSX = require('xlsx');
+    const worksheet = XLSX.utils.json_to_sheet(jsonData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    XLSX.writeFile(workbook, `${filename}.xlsx`);
+  };
     return (
       <>
       <div className="flex flex-row space-x-2 w-full justify-between my-2 py-2">
@@ -188,17 +209,30 @@ function DataTable({ columns }) {
 </div>
 
 
+<div>
+<label> Enter row count for export</label>
+      <div className="flex justify-center py-2 my-2 w-1/3 space-x-4">
+       
+        <Input type="number" placeholder="Enter Start Row: E.g. 1" onChange={e => { 
+          setStartRow(e.currentTarget.value); }}/>
+        <Input type="number" placeholder="Enter End Row: E.g. 20" onChange={e => { 
+         
 
-      <div className="flex justify-center py-2 my-2 w-1/5">
-        <Input type="text" placeholder="Enter row range to export" onChange={e => { 
-          setRowRange(e.currentTarget.value); }}/>
+            setEndRow(e.currentTarget.value); }}
+            onBlur={handleSecondInputBlur}
+          />
       </div>
+      
+      <div className="flex flex-row text-red-400 text-xs">
+        {error_row_range}
+      </div>
+</div>
       {/* buttons */}
 <div className="flex flex-row space-x-4 justify-center my-2">
 
 <Button
             variant="destructive"
-                className="bg-red border-2 w-1/6"
+                className="bg-gray-600 hover:bg-gray-800 w-1/6 flex space-x-2 text-white py-1"
             onClick={async () => {
               // console.log(selected_country, selected_industry,selected_platform,selected_revenue,selected_platform)
               const map_data = {
@@ -208,7 +242,7 @@ function DataTable({ columns }) {
                 revenue : selected_revenue,
                 technology : selected_tech,
                 } 
-                console.log(map_data);
+              
 
                 
                 try {
@@ -228,17 +262,32 @@ function DataTable({ columns }) {
                 }
             }}
           >
-           Filter
+          <FontAwesomeIcon icon={faFilter}/> <span> Filter</span>
            </Button>
 <Button
             variant="secondary"
-                className="bg-red border-2 w-1/6"
+                className="bg-blue-600 text-white w-1/6 flex space-x-4 hover:bg-blue-800"
             onClick={() => {
-              console.log("hi", row_range)
-console.log(table.getRowModel(1,10))
+              let startIndex = parseInt(startRow);
+              let endIndex = parseInt(endRow);
+              
+              if(startIndex < endIndex){
+  let row_array = [];
+  console.log(table.getRowModel(1,10))
+  var data  = table.getRowModel(1,10);
+  data.rows.map((id)=>{
+    row_array.push(id.original)
+  })
+
+  exportToExcel(row_array, 'data');
+              }
+              else{
+                setRowRangeError("Please enter valid start and end row")
+              }
+            
             }}
           >
-           Export
+           <FontAwesomeIcon icon={faDownload}/> <span>Export</span>
            </Button>
 </div>
 
@@ -247,8 +296,8 @@ Leads Available: {data.length}
 </div>
 {/* table data */}
       <div className="rounded-md border">
-        <Table style={{tableLayout: 'fixed', width: '100%' }}>
-          <TableHeader >
+        <Table style={{tableLayout: 'fixed', width: '100%' }} >
+          <TableHeader className={"bg-gray-800 text-white" } >
             {table.getHeaderGroups().map(headerGroup => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header => {
@@ -269,10 +318,11 @@ Leads Available: {data.length}
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map(row => (
+              table.getRowModel().rows.map((row, index )=> (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() ? "selected" : null}
+                  className={index % 2 == 0 ? "bg-gray-200" : ""}
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
