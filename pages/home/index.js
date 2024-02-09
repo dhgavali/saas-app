@@ -1,6 +1,6 @@
-import { Leads, columns } from "./columns"
+import { Leads, columns } from "../../components/table/columns"
 import { useState, useEffect } from "react";
-import { DataTable } from "./data_table"
+import {DataTable} from "../../components/table/data_table"
 import LandingHeader from "/components/landingPage/landingHeader";
 
 import {
@@ -30,10 +30,10 @@ export default  function  Home(){
 
   if (status === 'loading') return <p>Loading...</p>;
 
-  if (!session) {
-    // If the session is null, user is not authenticated, so render a message or redirect
-    router.push('/api/auth/signin');
-  }
+  // if (!session) {
+  //   // If the session is null, user is not authenticated, so render a message or redirect
+  //   router.push('/api/auth/signin');
+  // }
     // useEffect(() => {
     //   if (status === 'authenticated') {
     //     setIsAuthenticated(true);
