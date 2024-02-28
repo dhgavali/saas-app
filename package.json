@@ -41,6 +41,7 @@
     "raw-body": "^2.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.50.1",
     "react-icons": "^4.11.0",
     "stripe": "^13.5.0",
     "tailwind-merge": "^2.2.0",

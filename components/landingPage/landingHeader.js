@@ -112,10 +112,10 @@ export default function LandingHeader() {
                     ) : (
                       <>
                         <div className="mt-12 lg:mt-0">
-                          <Button link="/api/auth/signin" text="Login" />
+                          <Button link="/login" text="Login" />
                         </div>
                         <div className="mt-12 lg:mt-0 ml-2">
-                          <Button link="/api/auth/signin" text="Get Started" />
+                          <Button link="/signup" text="Get Started" />
                         </div>
                       </>
                     )}

@@ -18,6 +18,11 @@ module.exports = {
     },
     extend: {
       colors: {
+        // gelPrimary: "#121212",
+        gelPrimary: "#f3f3f3",
+        gelBg: "#161b22",
+        gelText: "#121212",
+        gelGray: "#d3d3d3",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

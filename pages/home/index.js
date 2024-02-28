@@ -28,8 +28,14 @@ export default  function  Home(){
     }
   }, [session, status, router]);
 
-  if (status === 'loading') return <p>Loading...</p>;
-
+  if (status === 'loading') {
+    return  (<div className="flex items-center justify-center space-x-2">
+    <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+    <div className="w-4 h-4 rounded-full animate-pulse dark:bg-violet-400"></div>
+  </div>);
+  }
+ 
   // if (!session) {
   //   // If the session is null, user is not authenticated, so render a message or redirect
   //   router.push('/api/auth/signin');

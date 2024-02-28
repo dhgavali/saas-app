@@ -66,8 +66,8 @@ function DataTable({ columns }) {
       getPaginationRowModel: getPaginationRowModel(),
     });
   
-    const [startRow, setStartRow] = useState(null);
-    const [endRow, setEndRow] = useState(null);
+  const [startRow, setStartRow] = useState(null);
+  const [endRow, setEndRow] = useState(null);
    const [selected_country, set_country] = useState("");
    const [selected_tech, set_tech] = useState("");
    const [selected_platform, set_platform] = useState("");
@@ -266,7 +266,7 @@ function DataTable({ columns }) {
            </Button>
 <Button
             variant="secondary"
-                className="bg-blue-600 text-white w-1/6 flex space-x-4 hover:bg-blue-800"
+                className="bg-gelBlue600 text-white w-1/6 flex space-x-4 hover:bg-blue-800"
             onClick={() => {
               let startIndex = parseInt(startRow);
               let endIndex = parseInt(endRow);

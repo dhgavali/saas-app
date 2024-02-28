@@ -76,3 +76,15 @@
 
 ## Components
 - All the reusable components for your SaaS
+
+
+
+<!-- basic compoent setup -->
+    <>
+         <div className="flex flex-col">
+    <LandingHeader/>
+    <div className="py-20  px-8 mb-0  ">
+       
+    </div>
+    </div>
+        </>
