@@ -31,9 +31,13 @@ CREATE TABLE "Session" (
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "name" TEXT,
+    "name" TEXT NOT NULL,
     "email" TEXT,
     "emailVerified" TIMESTAMP(3),
+    "password" TEXT NOT NULL,
+    "linkedIn" TEXT NOT NULL,
+    "website" TEXT,
+    "license" TEXT NOT NULL,
     "image" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
@@ -64,6 +68,18 @@ CREATE TABLE "MyDocuments" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "MyDocuments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Lead" (
+    "id" SERIAL NOT NULL,
+    "country" TEXT NOT NULL,
+    "industry" TEXT NOT NULL,
+    "platform" TEXT NOT NULL,
+    "revenue" TEXT NOT NULL,
+    "technology" TEXT NOT NULL,
+
+    CONSTRAINT "Lead_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

@@ -7,40 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Leads {
-  id                      Int     @id @default(autoincrement())
-  domain                  String? @db.VarChar(255)
-  description             String?
-  platform                String? @db.VarChar(255)
-  revenue                 String? @db.VarChar(255)
-  country                 String? @db.VarChar(255)
-  company_address         String?
-  technologies            String?
-  first_name              String? @db.VarChar(255)
-  last_name               String? @db.VarChar(255)
-  title                   String? @db.VarChar(255)
-  email                   String? @db.VarChar(255)
-  person_linkedin_url     String? @db.VarChar(255)
-  departments             String? @db.VarChar(255)
-  other_emails            String? @db.VarChar(255)
-  company_name_for_emails String? @db.VarChar(255)
-  corporate_phone         String? @db.VarChar(255)
-  employees               Int?
-  industry                String? @db.VarChar(255)
-  company_linkedin_url    String? @db.VarChar(255)
-  facebook_url            String? @db.VarChar(255)
-  twitter_url             String? @db.VarChar(255)
-  tiktok_url              String? @db.VarChar(255)
-  city                    String? @db.VarChar(255)
-  state                   String? @db.VarChar(255)
-  total_funding           String? @db.VarChar(255)
-  latest_funding          String? @db.VarChar(255)
-  latest_funding_amount   String? @db.VarChar(255)
-
-}
-
-
-
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -72,9 +38,13 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
+  name          String
   email         String?   @unique
   emailVerified DateTime?
+  password      String
+  linkedIn      String
+  website       String?
+  license       String
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -102,5 +72,12 @@ model MyDocuments {
   createdAt DateTime @default(now())
 }
 
-
+model Lead {
+  id          Int      @id @default(autoincrement())
+  country     String
+  industry    String
+  platform    String
+  revenue     String
+  technology  String
+}
 

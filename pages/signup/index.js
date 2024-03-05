@@ -1,21 +1,38 @@
-import LandingHeader from "/components/landingPage/landingHeader";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router"; // Import the useRouter hook
 import { Button } from "/components/ui/button";
 import { Input } from "/components/ui/input";
-import { useForm, submitHandler } from "react-hook-form";
-
-
+import LandingHeader from "/components/landingPage/landingHeader";
 
 export default function SignUp() {
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm({ mode: "onChange" });
+  const router = useRouter(); // Use the useRouter hook to access the router object
 
-  // form state and validation
-  const { register, handleSubmit, formState: {isValid, errors} } = useForm({mode: "onChange"});
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-  const passRegex= new RegExp(/^[a-zA-Z0-9]{6,16}$/)
-  const licenseRegex= new RegExp(/^[a-zA-Z0-9]{10}$/)
-  const emailRegex = new RegExp(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/)
-
-  const onSubmit = (data) => {
-    console.log(data);
+      if (response.ok) {
+        router.push("/login"); // Redirect to login page upon successful signup
+      } else {
+        console.error("Signup failed");
+        // Handle signup failure
+      }
+    } catch (error) {
+      console.error("Error occurred during signup:", error);
+      // Handle error
+    }
   };
 
   return (
@@ -30,72 +47,101 @@ export default function SignUp() {
             {/* want the below div to be center vertically */}
             <div className="flex flex-row justify-center w-full h-full items-center">
               <div className="flex flex-col justify-center py-2 my-2 w-1/4 bg-gray-100  px-6 b-1 rounded-sm">
-        <form className="w-full max-w-sm" onSubmit={handleSubmit(onSubmit)}>
-              
-                <div className=" text-2xl font-semibold text-center py-2  text-gray-600">Get Started !</div>
-                
-                <div className="py-2">
-             <Input  
-
-             placeholder="Full Name"  className="h-12  border-gray-300 text-gray-400 bg-gray-200 inputClass"   /> 
-
-                </div>
-                <div className="py-2">
-                  <Input  placeholder="Email ID"  className="h-12  border-gray-300 text-gray-400 bg-gray-200"  {...register('email',{
-              required: true,
-              pattern: emailRegex,
-            })}/>
-        {errors?.email && <span className="text-red-400 text-xs">Enter valid Email ID</span>}
-
-                </div>
-                <div className="py-2">
-                
-                  <Input type="Password" placeholder="Password" className="h-12   border-gray-300 text-gray-400 bg-gray-200" 
-                   {...register('password',{
-                    required: true,
-                    pattern: passRegex,
-                  })}
-                  />
-                  {errors?.password && <span className="text-red-400 text-xs">Password should have atleast 6 characters</span>}
-                </div>
-                <div className="py-2">
-                  <Input  placeholder="LinkedIn"  className="h-12  border-gray-300 text-gray-400 bg-gray-200"/>
-                </div>
-                <div className="py-2">
-                  <Input  placeholder="Website"  className="h-12  border-gray-300 text-gray-400 bg-gray-200"/>
-                </div>
-                <div className="py-2">
-                  <Input  placeholder="License Key"  className="h-12  border-gray-300 text-gray-400 bg-gray-200"
-                   {...register('license',{
-                    required: true,
-
-                  })}
-                  />
-                  {errors?.license && <span className="text-red-400 text-xs">License Key is required</span>}
-
-                </div>
-
-
-
-               
-               <div className="py-2 ">
-               <Button
-              variant="secondary"
-              type='submit'
-                  className="bg-blue-600 text-white w-full flex  hover:bg-blue-800 h-12"
-            >
-           Register
-             </Button>
-               </div>
-               
-              </form>  
+                <form
+                  className="w-full max-w-sm"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
+                  <div className="text-2xl font-semibold text-center py-2 text-gray-600">
+                    Get Started!
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="text"
+                      placeholder="Full Name"
+                      {...register("name", { required: true })}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200 inputClass"
+                    />
+                    {errors.name && (
+                      <span className="text-red-400 text-xs">
+                        Full Name is required
+                      </span>
+                    )}
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="text"
+                      placeholder="Email ID"
+                      {...register("email", {
+                        required: true,
+                        pattern: /^\S+@\S+$/i,
+                      })}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200"
+                    />
+                    {errors.email && (
+                      <span className="text-red-400 text-xs">
+                        Enter a valid Email ID
+                      </span>
+                    )}
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="password"
+                      placeholder="Password"
+                      {...register("password", {
+                        required: true,
+                        minLength: 6,
+                      })}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200"
+                    />
+                    {errors.password && (
+                      <span className="text-red-400 text-xs">
+                        Password should have at least 6 characters
+                      </span>
+                    )}
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="text"
+                      placeholder="LinkedIn"
+                      {...register("linkedIn")}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200"
+                    />
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="text"
+                      placeholder="Website"
+                      {...register("website")}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200"
+                    />
+                  </div>
+                  <div className="py-2">
+                    <Input
+                      type="text"
+                      placeholder="License Key"
+                      {...register("license", { required: true })}
+                      className="h-12 border-gray-300 text-gray-400 bg-gray-200"
+                    />
+                    {errors.license && (
+                      <span className="text-red-400 text-xs">
+                        License Key is required
+                      </span>
+                    )}
+                  </div>
+                  <div className="py-2">
+                    <Button
+                      type="submit"
+                      className="bg-blue-600 text-white w-full flex hover:bg-blue-800 h-12"
+                      disabled={!isValid}
+                    >
+                      Register
+                    </Button>
+                  </div>
+                </form>
               </div>
-
             </div>
-            
           </div>
         </div>
-        
       </div>
     </>
   );
